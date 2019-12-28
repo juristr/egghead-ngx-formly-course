@@ -5,7 +5,22 @@
 
   <div class="example-sidenav-container">
     <div class="container">
-      <router-outlet></router-outlet>
+      <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+        <formly-form
+          [model]="model"
+          [fields]="fields"
+          [form]="form"
+        ></formly-form>
+
+        <div
+          class="button-row"
+          style="display:flex; flex-direction: row; justify-content: space-between;"
+        >
+          <button type="reset" mat-raised-button>Clear</button>
+          <button mat-raised-button color="primary">Submit</button>
+        </div>
+      </form>
+      <app-form-debug [form]="form.value" [model]="model"></app-form-debug>
     </div>
   </div>
 </div>
