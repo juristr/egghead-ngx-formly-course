@@ -20,6 +20,11 @@ export class AppComponent {
       type: 'input',
       templateOptions: {
         label: 'Firstname'
+      },
+      hooks: {
+        onInit: (field: FormlyFieldConfig) => {
+          field.templateOptions.label = 'Firstname changed';
+        }
       }
     },
     {
