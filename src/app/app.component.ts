@@ -47,6 +47,9 @@ export class AppComponent {
         label: 'Cities',
         options: []
       },
+      expressionProperties: {
+        'templateOptions.disabled': model => !model.nationId
+      },
       hooks: {
         onInit: (field: FormlyFieldConfig) => {
           field.templateOptions.options = field.form
