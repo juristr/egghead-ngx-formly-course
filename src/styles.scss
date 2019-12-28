@@ -1,1 +1,68 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.outer-shell {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+}
+
+.container {
+  padding: 20px;
+  max-width: 800px;
+}
+
+.example-sidenav-container {
+  display: flex;
+  flex-grow: 1;
+}
+
+form {
+  .full-width {
+    width: 100%;
+  }
+}
+
+h1 {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 250%;
+}
+h2,
+h3 {
+  color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+}
+
+.multi-line-row {
+  width: 100%;
+  display: block;
+
+  formly-form {
+    display: flex;
+    width: 100%;
+
+    formly-field {
+      flex-grow: 1;
+      margin-right: 15px;
+    }
+
+    .row-action-buttons {
+      margin-top: 5px;
+
+      button {
+        width: inherit;
+        height: inherit;
+      }
+    }
+  }
+}
