@@ -51,6 +51,7 @@ export class AppComponent {
         'templateOptions.disabled': model => !model.nationId,
         'model.cityId': '!model.nationId ? null : model.cityId'
       },
+      hideExpression: model => !model.nationId,
       hooks: {
         onInit: (field: FormlyFieldConfig) => {
           field.templateOptions.options = field.form
