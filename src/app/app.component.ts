@@ -19,6 +19,14 @@ export class AppComponent {
       templateOptions: {
         label: 'Firstname'
       }
+    },
+    {
+      key: 'age',
+      type: 'input',
+      templateOptions: {
+        type: 'number',
+        label: 'Age'
+      }
     }
   ];
 
