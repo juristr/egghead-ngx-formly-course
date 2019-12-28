@@ -48,7 +48,8 @@ export class AppComponent {
         options: []
       },
       expressionProperties: {
-        'templateOptions.disabled': model => !model.nationId
+        'templateOptions.disabled': model => !model.nationId,
+        'model.cityId': '!model.nationId ? null : model.cityId'
       },
       hooks: {
         onInit: (field: FormlyFieldConfig) => {
