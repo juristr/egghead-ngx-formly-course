@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormGroup, FormControl, ValidationErrors } from '@angular/forms';
+import { FormlyFieldConfig, FormlyField } from '@ngx-formly/core';
 import { DataService } from './core/data.service';
 import { switchMap, startWith } from 'rxjs/operators';
 
@@ -15,7 +15,8 @@ export class AppComponent {
     firstname: 'Juri',
     age: 34,
     nationId: 1,
-    cityId: 1
+    cityId: 1,
+    ip: null
   };
   fields: FormlyFieldConfig[] = [
     {
@@ -71,6 +72,22 @@ export class AppComponent {
               startWith(this.model.nationId),
               switchMap(nationId => this.dataService.getCities(nationId))
             );
+        }
+      }
+    },
+    {
+      key: 'ip',
+      type: 'input',
+      templateOptions: {
+        label: 'IP Address',
+        required: true
+      },
+      validators: {
+        // validation: ['ip']
+        ip2: {
+          expression: c => !c.value || /(\d{1,3}\.){3}\d{1,3}/.test(c.value),
+          message: (errorr, field: FormlyFieldConfig) =>
+            `"${field.formControl.value}" is not valid`
         }
       }
     }

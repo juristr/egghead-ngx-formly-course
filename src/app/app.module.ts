@@ -5,12 +5,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormControl,
+  ValidationErrors
+} from '@angular/forms';
 import { FormlyModule, FormlyFieldConfig } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 
 export function minValidationMessage(err, field: FormlyFieldConfig) {
   return `Please provide a value bigger than ${err.min}. You provided ${err.actual}`;
+}
+
+export function ipValidationMessage(err, field: FormlyFieldConfig) {
+  return `"${field.formControl.value}" is not a valid IP address`;
+}
+
+export function IpValidator(control: FormControl): ValidationErrors {
+  return !control.value || /(\d{1,3}\.){3}\d{1,3}/.test(control.value)
+    ? null
+    : { ip: true };
 }
 
 @NgModule({
@@ -22,6 +36,12 @@ export function minValidationMessage(err, field: FormlyFieldConfig) {
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormlyModule.forRoot({
+      validators: [
+        {
+          name: 'ip',
+          validation: IpValidator
+        }
+      ],
       validationMessages: [
         {
           name: 'required',
@@ -30,6 +50,10 @@ export function minValidationMessage(err, field: FormlyFieldConfig) {
         {
           name: 'min',
           message: minValidationMessage
+        },
+        {
+          name: 'ip',
+          message: ipValidationMessage
         }
       ]
     }),
