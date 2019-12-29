@@ -17,7 +17,14 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    FormlyModule.forRoot(),
+    FormlyModule.forRoot({
+      validationMessages: [
+        {
+          name: 'required',
+          message: 'This field is required'
+        }
+      ]
+    }),
     FormlyMaterialModule
   ],
   providers: [],

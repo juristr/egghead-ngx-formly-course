@@ -25,7 +25,8 @@ export class AppComponent {
       key: 'firstname',
       type: 'input',
       templateOptions: {
-        label: 'Firstname'
+        label: 'Firstname',
+        required: true
       }
     },
     {
