@@ -6,8 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormlyModule } from '@ngx-formly/core';
+import { FormlyModule, FormlyFieldConfig } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
+
+export function minValidationMessage(err, field: FormlyFieldConfig) {
+  return `Please provide a value bigger than ${err.min}. You provided ${err.actual}`;
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +26,10 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
         {
           name: 'required',
           message: 'This field is required'
+        },
+        {
+          name: 'min',
+          message: minValidationMessage
         }
       ]
     }),

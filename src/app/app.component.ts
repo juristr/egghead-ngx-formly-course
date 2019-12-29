@@ -34,7 +34,13 @@ export class AppComponent {
       type: 'input',
       templateOptions: {
         type: 'number',
-        label: 'Age'
+        label: 'Age',
+        min: 18
+      },
+      validation: {
+        messages: {
+          min: 'Sorry, you have to be older than 18'
+        }
       }
     },
     {
