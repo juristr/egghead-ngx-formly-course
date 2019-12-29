@@ -11,12 +11,16 @@ import { switchMap, startWith } from 'rxjs/operators';
 export class AppComponent {
   form = new FormGroup({});
   model = {
+    id: 123123,
     firstname: 'Juri',
     age: 34,
     nationId: 1,
     cityId: 1
   };
   fields: FormlyFieldConfig[] = [
+    {
+      key: 'id'
+    },
     {
       key: 'firstname',
       type: 'input',
