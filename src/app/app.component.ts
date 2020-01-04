@@ -3,16 +3,46 @@ import { FormGroup, FormControl, ValidationErrors } from '@angular/forms';
 import {
   FormlyFieldConfig,
   FormlyField,
-  FormlyFormOptions
+  FormlyFormOptions,
+  FormlyTemplateOptions
 } from '@ngx-formly/core';
 import { DataService } from './core/data.service';
 import { switchMap, startWith, tap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 
 const formlyRow = (fieldConfig: FormlyFieldConfig[]) => {
   return {
     fieldGroupClassName: 'display-flex',
     fieldGroup: fieldConfig
+  };
+};
+
+const formlyInput = (config: {
+  key: string;
+  label: string;
+  templateOptions: FormlyTemplateOptions;
+}): FormlyFieldConfig => {
+  return {
+    key: config.key,
+    type: 'input',
+    className: 'flex-3',
+    templateOptions: {
+      label: config.label,
+      ...config.templateOptions
+    }
+  };
+};
+
+const formlyNationInput = (nations: Observable<any>) => {
+  return {
+    key: 'nationId',
+    type: 'select', // <select>
+    className: 'flex-3',
+    templateOptions: {
+      label: 'Nation',
+      options: nations
+    }
   };
 };
 
@@ -35,15 +65,13 @@ export class AppComponent {
       key: 'id'
     },
     formlyRow([
-      {
+      formlyInput({
         key: 'firstname',
-        type: 'input',
-        className: 'flex-3',
+        label: 'Firstname',
         templateOptions: {
-          label: 'Firstname',
           required: true
         }
-      },
+      }),
       {
         key: 'age',
         type: 'input',
@@ -61,15 +89,7 @@ export class AppComponent {
       }
     ]),
     formlyRow([
-      {
-        key: 'nationId',
-        type: 'select', // <select>
-        className: 'flex-3',
-        templateOptions: {
-          label: 'Nation',
-          options: this.dataService.getNations()
-        }
-      },
+      formlyNationInput(this.dataService.getNations()),
       {
         key: 'cityId',
         type: 'select', // <select>
