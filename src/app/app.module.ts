@@ -10,14 +10,23 @@ import {
   FormControl,
   ValidationErrors
 } from '@angular/forms';
-import { FormlyModule, FormlyFieldConfig } from '@ngx-formly/core';
+import {
+  FormlyModule,
+  FormlyFieldConfig,
+  FORMLY_CONFIG
+} from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgSelectFormlyComponent } from './ng-select.type';
 import { dataCyExtension } from './data-cy.extension';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslateLoader,
+  TranslateService
+} from '@ngx-translate/core';
+import { registerTranslateExtension } from './translate.extension';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -84,14 +93,21 @@ export function IpValidator(control: FormControl): ValidationErrors {
       ],
       extensions: [
         {
-          name: 'data-cy-extension',
+          name: 'data-cy- extension',
           extension: dataCyExtension
         }
       ]
     }),
     FormlyMaterialModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: FORMLY_CONFIG,
+      multi: true,
+      useFactory: registerTranslateExtension,
+      deps: [TranslateService]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
