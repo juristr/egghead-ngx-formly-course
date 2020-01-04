@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, ValidationErrors } from '@angular/forms';
 import { FormlyFieldConfig, FormlyField } from '@ngx-formly/core';
 import { DataService } from './core/data.service';
-import { switchMap, startWith } from 'rxjs/operators';
+import { switchMap, startWith, tap } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -94,7 +95,12 @@ export class AppComponent {
     }
   ];
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private translate: TranslateService
+  ) {
+    this.translate.use('de');
+  }
 
   onSubmit({ valid, value }) {
     console.log(value);

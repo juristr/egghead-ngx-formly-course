@@ -15,6 +15,14 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgSelectFormlyComponent } from './ng-select.type';
 import { dataCyExtension } from './data-cy.extension';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient, 'assets/i18n/', '.json');
+}
 
 export function minValidationMessage(err, field: FormlyFieldConfig) {
   return `Please provide a value bigger than ${err.min}. You provided ${err.actual}`;
@@ -39,6 +47,14 @@ export function IpValidator(control: FormControl): ValidationErrors {
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NgSelectModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     FormlyModule.forRoot({
       validators: [
         {
