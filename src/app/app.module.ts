@@ -14,6 +14,7 @@ import { FormlyModule, FormlyFieldConfig } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgSelectFormlyComponent } from './ng-select.type';
+import { dataCyExtension } from './data-cy.extension';
 
 export function minValidationMessage(err, field: FormlyFieldConfig) {
   return `Please provide a value bigger than ${err.min}. You provided ${err.actual}`;
@@ -63,6 +64,12 @@ export function IpValidator(control: FormControl): ValidationErrors {
         {
           name: 'my-autocomplete',
           component: NgSelectFormlyComponent
+        }
+      ],
+      extensions: [
+        {
+          name: 'data-cy-extension',
+          extension: dataCyExtension
         }
       ]
     }),
