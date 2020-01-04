@@ -1,3 +1,5 @@
+@import '~@ng-select/ng-select/themes/material.theme.css';
+
 html,
 body {
   height: 100%;
@@ -5,7 +7,7 @@ body {
 
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .outer-shell {

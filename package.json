@@ -21,13 +21,14 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@ng-select/ng-select": "^3.7.0",
+    "@ngx-formly/core": "^5.0.0",
+    "@ngx-formly/material": "^5.0.0",
     "@ngx-formly/schematics": "^5.5.7",
     "hammerjs": "^2.0.8",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
-    "zone.js": "~0.9.1",
-    "@ngx-formly/core": "^5.0.0",
-    "@ngx-formly/material": "^5.0.0"
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.21",

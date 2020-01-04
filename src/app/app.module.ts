@@ -12,6 +12,8 @@ import {
 } from '@angular/forms';
 import { FormlyModule, FormlyFieldConfig } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgSelectFormlyComponent } from './ng-select.type';
 
 export function minValidationMessage(err, field: FormlyFieldConfig) {
   return `Please provide a value bigger than ${err.min}. You provided ${err.actual}`;
@@ -28,13 +30,14 @@ export function IpValidator(control: FormControl): ValidationErrors {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NgSelectFormlyComponent],
   imports: [
     BrowserModule,
     SharedModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    NgSelectModule,
     FormlyModule.forRoot({
       validators: [
         {
@@ -54,6 +57,12 @@ export function IpValidator(control: FormControl): ValidationErrors {
         {
           name: 'ip',
           message: ipValidationMessage
+        }
+      ],
+      types: [
+        {
+          name: 'my-autocomplete',
+          component: NgSelectFormlyComponent
         }
       ]
     }),
