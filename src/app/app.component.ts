@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, ValidationErrors } from '@angular/forms';
-import {
-  FormlyFieldConfig,
-  FormlyField,
-  FormlyFormOptions,
-  FormlyTemplateOptions
-} from '@ngx-formly/core';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 import { DataService } from './core/data.service';
 import { switchMap, startWith, tap } from 'rxjs/operators';
-import { TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -27,9 +21,15 @@ export class AppComponent implements OnInit {
   };
   fields: FormlyFieldConfig[] = [];
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, private http: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.http
+      .get<FormlyFieldConfig[]>('/assets/dynamic-form.json')
+      .subscribe(fields => {
+        this.fields = fields;
+      });
+  }
 
   onSubmit({ valid, value }) {
     console.log(value);

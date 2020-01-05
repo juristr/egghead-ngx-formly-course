@@ -1,0 +1,82 @@
+[
+  {
+    "fieldGroupClassName": "display-flex",
+    "fieldGroup": [
+      {
+        "key": "firstname",
+        "type": "input",
+        "className": "flex-3",
+        "templateOptions": {
+          "label": "Firstname",
+          "required": true
+        }
+      },
+      {
+        "key": "age",
+        "type": "input",
+        "className": "flex-1",
+        "templateOptions": {
+          "type": "number",
+          "label": "Age",
+          "min": 18
+        },
+        "validation": {
+          "messages": {
+            "min": "Sorry, you have to be older than 18"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "fieldGroupClassName": "display-flex",
+    "fieldGroup": [
+      {
+        "key": "nationId",
+        "type": "select",
+        "className": "flex-3",
+        "templateOptions": {
+          "label": "Nation",
+          "options": [
+            {
+              "value": null,
+              "label": "--"
+            },
+            {
+              "value": 1,
+              "label": "Italy"
+            }
+          ]
+        }
+      },
+      {
+        "key": "cityId",
+        "type": "select",
+        "className": "flex-3",
+        "templateOptions": {
+          "label": "Cities",
+          "options": []
+        },
+        "expressionProperties": {
+          "templateOptions.disabled": "!model.nationId",
+          "model.cityId": "!model.nationId ? null : model.cityId"
+        },
+        "hideExpression": "!model.nationId"
+      }
+    ]
+  },
+  {
+    "fieldGroupClassName": "display-flex",
+    "fieldGroup": [
+      {
+        "key": "ip",
+        "type": "input",
+        "className": "flex-6",
+        "templateOptions": {
+          "label": "IP Address",
+          "required": true
+        }
+      }
+    ]
+  }
+]
