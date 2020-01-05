@@ -89,6 +89,19 @@ export function IpValidator(control: FormControl): ValidationErrors {
         {
           name: 'my-autocomplete',
           component: NgSelectFormlyComponent
+        },
+        {
+          name: 'string',
+          extends: 'input'
+        },
+        {
+          name: 'number',
+          extends: 'input',
+          defaultOptions: {
+            templateOptions: {
+              type: 'number'
+            }
+          }
         }
       ],
       extensions: [

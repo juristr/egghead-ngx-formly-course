@@ -4,6 +4,7 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { DataService } from './core/data.service';
 import { switchMap, startWith, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
 
 @Component({
   selector: 'app-root',
@@ -21,13 +22,19 @@ export class AppComponent implements OnInit {
   };
   fields: FormlyFieldConfig[] = [];
 
-  constructor(private dataService: DataService, private http: HttpClient) {}
+  constructor(
+    private dataService: DataService,
+    private http: HttpClient,
+    private formlyJsonSchema: FormlyJsonschema
+  ) {}
 
   ngOnInit() {
     this.http
       .get<FormlyFieldConfig[]>('/assets/dynamic-form.json')
-      .subscribe(fields => {
-        this.fields = fields;
+      .subscribe(jsonSchema => {
+        const formlyConfig = this.formlyJsonSchema.toFieldConfig(jsonSchema);
+
+        this.fields = formlyConfig.fieldGroup;
       });
   }
 
